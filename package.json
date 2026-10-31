@@ -1,0 +1,14 @@
+{
+  "name": "sopalens",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SopaLens: Multilingual word search puzzle scanner, finder and visual solver",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "engines": {"node": ">=18"},
+  "keywords": ["word-search", "sopa-de-letras", "pupiletras", "OCR", "multilingual", "tesseract"]
+}

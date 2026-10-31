@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="168" height="168" viewBox="0 0 168 168" role="img" aria-label="Mascota SopaLens">
+<defs><linearGradient id="h" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#faffff"/><stop offset="1" stop-color="#bcd8ff"/></linearGradient><linearGradient id="f" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1b2a62"/><stop offset="1" stop-color="#151a43"/></linearGradient><linearGradient id="b" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#36b8ff"/><stop offset="1" stop-color="#7770ff"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="5"/></filter></defs>
+<ellipse cx="84" cy="148" rx="51" ry="9" fill="#5d86d3" opacity=".17" filter="url(#s)"/>
+<path d="M72 117h25l9 24H62z" fill="url(#b)"/>
+<path d="M54 126c11-10 49-10 60 0l8 18H45z" fill="url(#h)" stroke="#8ac1fc" stroke-width="2"/>
+<path d="M51 132c-7-5-14-4-19 2m83-2c8-5 15-4 20 2" fill="none" stroke="#60a5fd" stroke-linecap="round" stroke-width="10"/>
+<path d="m133 128 7-11m-8 9 12 0m-11 1 10 9" fill="none" stroke="url(#b)" stroke-width="7" stroke-linecap="round"/>
+<path d="M84 25v-11" stroke="#7195f5" stroke-width="5" stroke-linecap="round"/><circle cx="84" cy="10" r="7" fill="#8857fa"/><circle cx="84" cy="8" r="2" fill="white"/>
+<rect x="25" y="30" width="118" height="89" rx="38" fill="url(#h)" stroke="#a1cfff" stroke-width="3"/>
+<rect x="38" y="42" width="92" height="63" rx="27" fill="url(#f)"/>
+<rect x="16" y="61" width="14" height="26" rx="7" fill="url(#b)"/><rect x="138" y="61" width="14" height="26" rx="7" fill="url(#b)"/>
+<ellipse cx="67" cy="69" rx="9" ry="13" fill="#4ad9ff"/><ellipse cx="105" cy="69" rx="9" ry="13" fill="#4ad9ff"/>
+<ellipse cx="65" cy="65" rx="3" ry="5" fill="white" opacity=".82"/><ellipse cx="103" cy="65" rx="3" ry="5" fill="white" opacity=".82"/>
+<path d="M78 88q8 7 16 0" fill="none" stroke="#51dcff" stroke-width="3" stroke-linecap="round"/>
+<circle cx="44" cy="22" r="3" fill="#9e65f5"/><path d="m139 21 3 7 7 3-7 3-3 7-3-7-7-3 7-3z" fill="#935ef4"/>
+</svg>
