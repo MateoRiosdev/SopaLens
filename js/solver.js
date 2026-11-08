@@ -6,9 +6,19 @@ export const DIRECTIONS = [
   { dr: -1, dc: 1, id: 'up-right' }, { dr: -1, dc: -1, id: 'up-left' }
 ];
 export function normalized(value) {
-  return String(value ?? '').replace(/ñ/g, '\uE000').replace(/Ñ/g, '\uE001').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleUpperCase().replace(/\uE000/g,'Ñ').replace(/\uE001/g,'Ñ').replace(/[^\p{L}]/gu, '');
+  return String(value ?? '').replace(/ñ/g, '\uE000').replace(/Ñ/g, '\uE001').normalize('NFD')
+    .replace(/(\p{Script=Latin})\p{M}+/gu, '$1')
+    .toLocaleUpperCase()
+    .replace(/\uE000/g, 'Ñ').replace(/\uE001/g, 'Ñ')
+    .replace(/[^\p{L}\p{M}]/gu, '').normalize('NFC');
 }
-export function graphemes(value) { return Array.from(normalized(value)); }
+export function graphemes(value) {
+  const text = normalized(value);
+  if (typeof Intl !== 'undefined' && Intl.Segmenter) {
+    return [...new Intl.Segmenter(undefined, { granularity: 'grapheme' }).segment(text)].map(part => part.segment);
+  }
+  return Array.from(text);
+}
 export function parseGrid(raw) {
   const lines = String(raw).split(/\r?\n/).map(line => graphemes(line)).filter(row => row.length);
   if (!lines.length) throw new Error('empty');
@@ -20,9 +30,9 @@ export function findWords(grid, candidates, categories = {}) {
   if (!grid?.length) return [];
   const height = grid.length, width = grid[0].length;
   const used = new Set(); const found = [];
-  const words = [...new Set(candidates.map(normalized).filter(word => word.length >= 3 && word.length <= Math.max(height, width)))];
+  const words = [...new Set(candidates.map(normalized).filter(word => graphemes(word).length >= 1 && graphemes(word).length <= Math.max(height, width)))];
   for (const word of words) {
-    const chars = Array.from(word);
+    const chars = graphemes(word);
     for (let r = 0; r < height; r++) for (let c = 0; c < width; c++) {
       if (normalized(grid[r][c]) !== chars[0]) continue;
       for (const dir of DIRECTIONS) {
@@ -86,7 +96,7 @@ export function filterMatches(found, intent) {
     if (intent.contains && !item.word.includes(intent.contains)) return false;
     if (intent.starts && !item.word.startsWith(intent.starts)) return false;
     if (intent.ends && !item.word.endsWith(intent.ends)) return false;
-    if (intent.length && Array.from(item.word).length !== intent.length) return false;
+    if (intent.length && graphemes(item.word).length !== intent.length) return false;
     if (intent.exact && item.word !== intent.exact) return false;
     if (intent.category && item.category !== intent.category) return false;
     if (intent.direction === 'diagonal' && !item.direction.includes('-')) return false;

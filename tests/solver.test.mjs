@@ -53,3 +53,24 @@ test('length filter is not mistaken for letter S',()=>{
  const i=parseIntent('Encuentra palabras de 5 letras');
  assert.equal(i.length,5); assert.equal(i.contains,'');
 });
+
+test('returns every occurrence of a repeated word at different positions',()=>{
+ const g=parseGrid('X X X X\nC A T X\nX C A T\nX X X X');
+ const found=findWords(g,['CAT']);
+ assert.equal(found.filter(item=>item.word==='CAT').length,2);
+});
+
+test('supports short literal sequences for direct grid search',()=>{
+ const g=parseGrid('L E X A\nX X X X\nE L X X\nX X X X');
+ const found=findWords(g,['LE']);
+ assert.equal(found.length,2);
+ assert.ok(found.some(item=>item.cells[0].r===0&&item.cells[0].c===0));
+});
+
+test('finds repeated XXX and SOL in horizontal and diagonal placements',()=>{
+ const g=parseGrid('S Q Q Q Q Q\nQ O Q Q Q Q\nQ Q L Q Q Q\nS O L Q Q Q\nX X X Q Q Q\nX X X Q Q Q');
+ const found=findWords(g,['XXX','SOL']);
+ assert.equal(found.filter(item=>item.word==='XXX').length,2);
+ assert.equal(found.filter(item=>item.word==='SOL').length,2);
+ assert.deepEqual(new Set(found.filter(item=>item.word==='SOL').map(item=>item.direction)),new Set(['right','down-right']));
+});
