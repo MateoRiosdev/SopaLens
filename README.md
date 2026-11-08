@@ -1,133 +1,198 @@
 # 🔎 SopaLens — Solver inteligente de sopas de letras
 
-**SopaLens** es una plataforma web que reconoce letras en una imagen y encuentra palabras reales dentro de una sopa de letras o pupiletras. Marca las palabras en la cuadrícula y filtra los resultados con búsquedas como «Encuentra palabras que tengan C», «Animales», «En diagonal» o «De 5 letras».
+**SopaLens** es una plataforma web que reconoce letras en imágenes y encuentra palabras reales dentro de una sopa de letras o pupiletras. Resalta las coincidencias directamente en la cuadrícula y permite filtrar los resultados mediante criterios como «Palabras que contengan C», «En diagonal», «De 5 letras» o «Animales».
 
-## ✨ Características
+Además, permite crear pupiletras personalizados, resolverlos manualmente y descargar las actividades con o sin respuestas.
 
-- 📷 Subir o arrastrar imágenes JPG/PNG/WEBP y **recortar visualmente** la cuadrícula.
-- 🔎 OCR con **Tesseract.js** que se ejecuta directamente en el navegador, sin subir imágenes a un servidor.
-- 🧩 Buscar palabras en **8 direcciones** y resaltar posiciones exactas en colores.
-- 🗣️ Búsqueda en lenguaje natural para filtros comunes; integración opcional con Gemini vía función del servidor.
-- 🌐 Interfaz + OCR + vocabulario inicial para **español, inglés, portugués, francés, alemán, italiano, neerlandés y catalán**.
-- 📚 Lista de palabras editable, más un pequeño diccionario temático por idioma para búsqueda automática.
-- 🌗 Tema claro/oscuro, diseño responsive, selector de idioma y exportación PNG.
-- 🧩 Modo **Crear pupiletras**: genera cuadrículas a partir de palabras, con tamaños de 8×8 a 20×20 y tres niveles de dificultad, mediante controles visuales personalizados.
-- ✍️ Selección manual de letras en ambos modos; el generador incluye una vista previa de cuadrícula y controles adaptados a escritorio y móvil.
-- 📥 Descarga la actividad sin respuestas o una versión con las respuestas resaltadas. El generador funciona localmente, sin API ni envío de palabras al servidor.
-- 🔒 No requiere registro ni clave de API para OCR y búsqueda local.
+## ✨ Características principales
+
+### 🔍 Resolver pupiletras
+
+- 📷 Subir o arrastrar imágenes JPG, PNG y WEBP.
+- ✂️ Recortar visualmente la cuadrícula antes de procesarla.
+- 🔎 Reconocimiento óptico de caracteres (OCR) mediante **Tesseract.js**, ejecutado directamente en el navegador.
+- 🧩 Buscar palabras en las **8 direcciones** y resaltar sus posiciones exactas con colores.
+- 🔤 Editar manualmente las letras detectadas y corregir la cuadrícula.
+- 📚 Introducir una lista personalizada de palabras o utilizar vocabularios temáticos incorporados.
+- 🎯 Buscar letras individuales, secuencias cortas y todas las apariciones de una palabra.
+- 🗣️ Filtrar resultados mediante consultas en lenguaje natural.
+
+### 🧩 Crear pupiletras
+
+- ✍️ Generar sopas de letras a partir de palabras personalizadas.
+- 📐 Elegir tamaños de cuadrícula desde **8×8 hasta 20×20**.
+- 🎚️ Seleccionar tres niveles de dificultad: fácil, intermedio y difícil.
+- 🌐 Admitir caracteres Unicode y distintos sistemas de escritura mediante grafemas.
+- 👆 Seleccionar manualmente las casillas para marcar o desmarcar letras.
+- 📥 Descargar la actividad sin respuestas o con las soluciones resaltadas en PNG.
+- 🔒 Generar las cuadrículas localmente, sin API ni envío de palabras a un servidor.
+
+### 🌍 Idiomas y personalización
+
+- Español 🇪🇸
+- Inglés 🇬🇧
+- Portugués 🇵🇹
+- Francés 🇫🇷
+- Alemán 🇩🇪
+- Italiano 🇮🇹
+- Neerlandés 🇳🇱
+- Catalán 🏴
+
+La interfaz, el OCR y los vocabularios iniciales están preparados para estos ocho idiomas.
+
+También incluye:
+- 🌗 Tema claro y oscuro.
+- 📱 Diseño responsive para escritorio, tabletas y móviles.
+- 🎨 Selectores desplegables personalizados.
+- 🖼️ Exportación de resultados y actividades en PNG.
+
+## 🛠️ Tecnologías utilizadas
+
+| Tecnología | Uso |
+|---|---|
+| HTML5 | Estructura de la plataforma |
+| CSS3 | Diseño responsive y estilos |
+| JavaScript | Lógica e interacción |
+| Tesseract.js | Reconocimiento óptico de caracteres |
+| Gemini API (opcional) | Interpretación de consultas complejas |
+| Node.js | Servidor local |
+| Vercel | Despliegue y función opcional de IA |
 
 ## 🚀 Ejecutar localmente
 
-Solo necesitas **Node.js 18+**. **No tienes que instalar dependencias**.
+### Requisitos
 
-```bash
+- **Node.js 18 o superior**.
+- No necesitas instalar dependencias adicionales.
+
+### Instalación y ejecución
+
+Clona el repositorio:
+
+\`\`\`bash
+git clone https://github.com/MateoRiosdev/SopaLens.git
+cd SopaLens
+\`\`\`
+
+Inicia el servidor local:
+
+\`\`\`bash
 npm run dev
-```
+\`\`\`
 
-Visita **http://localhost:5173**.
+Abre la siguiente dirección en tu navegador:
 
-También puedes utilizar cualquier servidor HTTP estático (GitHub Pages, `python -m http.server`, etc.). No abras `index.html` mediante `file://`, porque los módulos JavaScript y los workers de OCR necesitan un servidor HTTP.
+\`\`\`text
+http://localhost:5173
+\`\`\`
 
-Pruebas:
+### Ejecutar pruebas
 
-```bash
+Para ejecutar las pruebas automatizadas:
+
+\`\`\`bash
 npm test
-```
+\`\`\`
 
-## 🤖 IA opcional (Gemini)
+También puedes utilizar cualquier servidor HTTP estático. No abras directamente `index.html` mediante `file://`, porque los módulos JavaScript y los workers del OCR necesitan un servidor HTTP.
 
-El OCR usa un modelo de reconocimiento de caracteres. Las búsquedas comunes se interpretan localmente mediante reglas sin IA generativa, y el algoritmo de cuadrícula comprueba todas las coincidencias, sin inventar palabras.
+## 🤖 IA opcional — Gemini
 
-Para interpretar consultas *más complejas* con Gemini, despliega en **Vercel** y crea la variable de entorno **`GEMINI_API_KEY`** (se mantiene en el servidor). Puedes cambiar el modelo mediante `GEMINI_MODEL`. La función `api/interpret.js` solo recibe la consulta de texto, **no** la imagen. La disponibilidad, límites y costos del plan gratuito dependen del proveedor. Sin clave, los filtros locales siguen funcionando.
+SopaLens no necesita inteligencia artificial generativa para reconocer las letras, resolver las cuadrículas ni aplicar los filtros comunes.
 
-**Nunca pongas la clave en el código frontend ni la subas a GitHub**.
+La búsqueda funciona mediante algoritmos locales que comprueban las coincidencias directamente en la matriz.
 
-## 🎯 Importante sobre la precisión
+Para interpretar consultas más complejas mediante Gemini:
 
-- El OCR puede equivocarse con imágenes borrosas, rotadas, inclinadas, letras pegadas o con líneas superpuestas. **Edita la cuadrícula** si fuera necesario.
-- Si dispones de la lista de palabras del ejercicio, introdúcela: la búsqueda será exhaustiva para esas palabras.
-- Sin lista, la búsqueda automática utiliza un **vocabulario temático incorporado**, que es limitado: no pretende cubrir todas las palabras de ningún idioma. Puedes ampliar los diccionarios en `js/dictionary.js`.
-- Las palabras encontradas están **verificadas letra a letra en la cuadrícula**; SopaLens no muestra palabras que el algoritmo no encuentre.
-- El OCR y los diccionarios integrados están preparados para los ocho idiomas enumerados. El generador y la búsqueda exacta, en cambio, admiten palabras Unicode de otros sistemas de escritura (por ejemplo, chino y japonés), usando una casilla por grafema; las casillas vacías se completan con letras latinas A–Z. En japonés, introduce cada palabra completa en una línea (o separada por comas); no se realiza segmentación automática de frases en palabras. La precisión del OCR para esos idiomas no está incluida ni garantizada.
-- La primera carga de OCR requiere acceso a internet para descargar el motor y el idioma (posteriormente el navegador puede reutilizar recursos en caché).
+1. Despliega el proyecto en **Vercel**.
+2. Configura la variable de entorno `GEMINI_API_KEY`.
+3. Opcionalmente, establece `GEMINI_MODEL` para seleccionar el modelo.
 
-## 🧱 Estructura
+La función `api/interpret.js` recibe únicamente el texto de la consulta, **no la imagen ni la cuadrícula**.
 
-```text
+Sin una clave de Gemini, los filtros locales siguen funcionando.
+
+> 🔐 Nunca coloques tu clave API en el código frontend ni la publiques en GitHub. La clave debe permanecer exclusivamente en las variables de entorno del servidor.
+
+La disponibilidad, los límites y los posibles costos dependen del proveedor de IA.
+
+## 🎯 Precisión y limitaciones
+
+- El OCR puede equivocarse con imágenes borrosas, rotadas, inclinadas, deformadas o con letras superpuestas.
+- Se recomienda revisar y corregir manualmente la cuadrícula cuando sea necesario.
+- Si dispones de la lista de palabras del ejercicio, introdúcela para realizar una búsqueda exhaustiva de esas palabras.
+- Sin una lista personalizada, la búsqueda automática utiliza vocabularios temáticos incorporados, que son limitados y no pretenden cubrir todas las palabras de un idioma.
+- Las palabras encontradas se verifican letra a letra en la cuadrícula. No se muestran coincidencias que el algoritmo no haya encontrado.
+- El OCR y los diccionarios incorporados están preparados para los ocho idiomas enumerados.
+- El generador y la búsqueda exacta admiten palabras Unicode de otros sistemas de escritura, como chino y japonés, utilizando una casilla por grafema.
+- Las casillas de relleno se completan con letras latinas A–Z. En japonés, introduce cada palabra completa en una línea o separada por comas; no se realiza segmentación automática de frases.
+- La precisión del OCR para idiomas distintos de los ocho configurados no está garantizada.
+- La primera carga del OCR necesita conexión a internet para descargar el motor y los datos del idioma. El navegador puede reutilizar estos recursos posteriormente mediante la caché.
+
+## 🧱 Estructura del proyecto
+
+\`\`\`text
 SopaLens/
 ├── index.html
 ├── styles.css
-├── assets/favicon.svg
+├── assets/
+│   └── favicon.svg
 ├── js/
-│   ├── app.js             # Interfaz, eventos, dos modos, edición y exportación
-│   ├── solver.js          # Búsqueda exacta en 8 direcciones + filtros
-│   ├── generator.js       # Generador local de cuadrículas
-│   ├── ocr.js             # Recorte y Tesseract.js
-│   ├── dictionary.js      # Vocabularios temáticos por idioma
-│   └── languages.js       # Traducciones de la UI y códigos OCR
-├── api/interpret.js       # Gemini opcional (Vercel)
-├── tests/generator.test.mjs
-├── tests/solver.test.mjs
-├── server.mjs             # Servidor local sin dependencias
-└── vercel.json
-```
+│   ├── app.js
+│   ├── solver.js
+│   ├── generator.js
+│   ├── ocr.js
+│   ├── dictionary.js
+│   └── languages.js
+├── api/
+│   └── interpret.js
+├── tests/
+│   ├── generator.test.mjs
+│   └── solver.test.mjs
+├── server.mjs
+├── vercel.json
+└── package.json
+\`\`\`
 
-## ☁️ Publicar
+### Descripción de los módulos
 
-**GitHub:** crea un repositorio nuevo llamado `SopaLens` y sube el contenido de esta carpeta.
+- `app.js`: interfaz, eventos, modos de trabajo, edición y exportación.
+- `solver.js`: búsqueda exacta en ocho direcciones y filtros.
+- `generator.js`: generación local de cuadrículas.
+- `ocr.js`: recorte de imágenes y reconocimiento mediante Tesseract.js.
+- `dictionary.js`: vocabularios temáticos por idioma.
+- `languages.js`: traducciones de la interfaz y códigos de OCR.
+- `api/interpret.js`: integración opcional con Gemini para Vercel.
 
-**Vercel:** importa el repositorio, elige framework **Other**, sin comando de compilación, con la carpeta raíz como directorio de salida. Las funciones dentro de `api/` se reconocerán en Vercel.
+## ☁️ Despliegue
 
-**GitHub Pages:** funciona toda la experiencia estática (OCR, solución, temas e idiomas); el endpoint de Gemini no se activa en GitHub Pages.
+### Vercel
 
-## Autor
+1. Importa el repositorio de GitHub.
+2. Selecciona **Other** como Framework Preset.
+3. Utiliza `.` como Root Directory.
+4. Deja vacíos los comandos de compilación, instalación y directorio de salida.
+5. Configura `GEMINI_API_KEY` únicamente si deseas habilitar la interpretación opcional con Gemini.
 
-© 2026 [**MateoRiosdev**](https://www.linkedin.com/in/mateojuliogomerorios/). Todos los derechos reservados.
+Vercel reconocerá automáticamente la función ubicada en `api/interpret.js`.
 
+### GitHub Pages
 
-## V2 — Recorte y Gemini por usuario
+La experiencia estática también puede publicarse mediante GitHub Pages. Las funcionalidades locales de OCR, resolución, generación, idiomas y temas pueden utilizarse sin el endpoint de Gemini.
 
-- Carga una foto, arrastra para recortar exclusivamente la cuadrícula dentro del modal. Cuenta filas y columnas y escríbelas antes de analizar. Las filas se procesan por separado para no concatenar letras de líneas distintas.
-- **Importante:** el OCR no garantiza resultados perfectos con fotos torcidas, cuadrículas deformadas, letras borrosas o tamaños mal declarados. Se recomienda corregir manualmente la matriz desde «Editar cuadrícula». No se afirma validación OCR en todos los tipos de foto.
-- El botón «Reiniciar recorte» elimina la selección y los resultados OCR anteriores y vuelve a abrir el recorte.
-- La IA opcional para interpretar consultas complejas utiliza `GEMINI_API_KEY` configurada exclusivamente como variable de entorno del servidor en Vercel. No se introduce ni almacena una clave de Gemini en el navegador.
-- La búsqueda de letras funciona sin Gemini (por ejemplo «Encuentra palabras con la letra C»).
-- Banderas circulares proporcionadas por flagcdn.com; se necesita conexión para cargarlas. Para catalán se utiliza la bandera de España como referencia de región/idioma.
+## 🔒 Privacidad
 
-## Actualización del editor interactivo
+- No requiere registro de usuario.
+- No necesita una clave API para resolver o generar pupiletras.
+- El procesamiento OCR se ejecuta en el navegador.
+- La cuadrícula y las palabras del generador se procesan localmente.
+- La función opcional de Gemini recibe solamente el texto de la consulta.
 
-Esta revisión añade:
+## 👨‍💻 Autor
 
-- Corrección directa de letras desde la cuadrícula de la solución visual.
-- Editor de cuadrícula por casillas individuales.
-- Vista de la imagen original dentro del editor (dos columnas en escritorio y una en móvil).
-- Lista de palabras mediante etiquetas que se agregan o eliminan sin comas.
-- Búsqueda directa de una letra (resalta todas sus casillas) y de secuencias cortas como `LE`.
-- Presentación de todas las apariciones de una palabra, aunque se repita o aparezca en distintas direcciones.
-- Traducción de las direcciones de búsqueda según el idioma de la interfaz.
+Desarrollado por **[MateoRiosdev](https://github.com/MateoRiosdev)**.
 
-Ejecutar las pruebas con `npm test`.
+- GitHub: [MateoRiosdev](https://github.com/MateoRiosdev)
+- LinkedIn: [Mateo Julio Gomero Rios](https://www.linkedin.com/in/mateojuliogomerorios/)
 
-
-## V6 — Crear pupiletras y sincronización de idioma
-
-- Se añade el modo **Crear pupiletras**, con palabras personalizadas, tamaños de 8×8 a 20×20 y dificultades fácil, intermedia y difícil.
-- El generador funciona en el navegador y permite descargar la cuadrícula limpia o la solución resaltada. Si alguna palabra no cabe, se informa en lugar de descartarla silenciosamente.
-- Se elimina el acceso a Preferencias: el idioma y el tema se controlan desde el encabezado. El idioma de interfaz también determina el idioma del ejemplo, su lista de palabras y el OCR.
-- El ejemplo se genera de forma reproducible y está localizado en los ocho idiomas admitidos.
-- En móviles, los botones principales Subir imagen y Analizar imagen ocupan columnas de igual anchura; la descarga queda en una fila completa.
-- Se retira el campo BYOK de Gemini del frontend; la clave, si se configura, permanece únicamente en el servidor.
-
-Pruebas automatizadas: `npm test` (33 pruebas).
-
-
-## V7 — Selección manual y escritura Unicode
-
-- Las palabras del título «Crear pupiletras» utilizan el mismo degradado visual que el título principal.
-- Se aumenta la legibilidad de los botones de modo en pantallas pequeñas.
-- En el modo Resolver, la indicación y las acciones para editar la cuadrícula se sitúan debajo de «Restaurar ejemplo».
-- En escritorio, al generar una actividad, el tablero queda a la izquierda y el formulario a la derecha; los títulos, botón de generación y aviso de privacidad quedan centrados.
-- En ambos modos se pueden tocar o pulsar casillas para marcarlas manualmente y volver a pulsarlas para desmarcarlas.
-- El generador y el buscador trabajan con grafemas Unicode: pueden colocar palabras en chino, japonés y otros sistemas de escritura, mientras las casillas de relleno usan A–Z. El OCR integrado sigue limitado a los ocho idiomas configurados.
-
-Pruebas automatizadas: `npm test`.
+© 2026 MateoRiosdev. Todos los derechos reservados.
