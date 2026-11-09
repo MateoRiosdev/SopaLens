@@ -131,12 +131,17 @@ La disponibilidad, los límites y los posibles costos dependen del proveedor de 
 
 ## 🧱 Estructura del proyecto
 
-\`\`\`text
+```text
 SopaLens/
 ├── index.html
 ├── styles.css
+├── package.json
+├── server.mjs
+├── vercel.json
+│
 ├── assets/
 │   └── favicon.svg
+│
 ├── js/
 │   ├── app.js
 │   ├── solver.js
@@ -144,16 +149,15 @@ SopaLens/
 │   ├── ocr.js
 │   ├── dictionary.js
 │   └── languages.js
+│
 ├── api/
 │   └── interpret.js
-├── tests/
-│   ├── generator.test.mjs
-│   └── solver.test.mjs
-├── server.mjs
-├── vercel.json
-└── package.json
-\`\`\`
-
+│
+└── tests/
+    ├── generator.test.mjs
+    └── solver.test.mjs
+```
+    
 ### Descripción de los módulos
 
 - `app.js`: interfaz, eventos, modos de trabajo, edición y exportación.
